@@ -10,6 +10,9 @@ export default function HomeBtns() {
     const [fetchState, setFecthState] = useState(false)
     const [netReq, setNetReq] = useState(false)
     const toast = useToast()
+   
+   
+// Fetching and updating the database
     const fetchUser = async()=>{
         setFecthState(true)
         // setNetReq(true)
@@ -28,6 +31,7 @@ export default function HomeBtns() {
         }
     }
 
+// handling fetch request, throw error if one req is pending 
     const handlefetch = async ()=>{
         if(fetchState){
             toast({
@@ -43,24 +47,34 @@ export default function HomeBtns() {
         
     }
 
+// Delete users from database
 const deleteUsers = async()=>{
     setNetReq(true)
-    try {
-        
-        await axios.delete(`${import.meta.env.VITE_APIURL}/deleteusers`)
+    try { 
+       let res =  await axios.delete(`${import.meta.env.VITE_APIURL}/deleteusers`)
         setNetReq(false)
         toast({
-            title: 'Deleted',
-            description: "Users Data deleted Successfully.",
+            title: 'Deleted Successfully',
+            description: res.data,
             status: 'success',
             duration: 5000,
             isClosable: true,
         })
+       
     } catch (err) {
-        throw err
+        setNetReq(false)
+        toast({
+            title: 'Failed To Delete',
+            description: err.response.data,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+        })
+
     }
 }
 
+// handling delete request, throw error if one req is pending
 const handleDelete = ()=>{
     if(netReq){
         toast({
