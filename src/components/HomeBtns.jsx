@@ -101,13 +101,14 @@ const handleDelete = ()=>{
                 Fetch Users
                 <SpinnerCircle spin={fetchState}/>
             </Button>
+            <Button colorScheme={"facebook"} w={["60%", "200px","200px","200px"]}>
+               <Link to="/users-details"> Users Details  </Link>      
+            </Button>
             <Button onClick={handleDelete} colorScheme="red" w={["60%", "200px","200px","200px"]}>
                 Delete Users
                 <SpinnerCircle spin={netReq}/>
             </Button>
-            <Button colorScheme={"facebook"} w={["60%", "200px","200px","200px"]}>
-               <Link to="/users-details"> Users Details  </Link>      
-            </Button>
+           
 
         </Flex>
 
