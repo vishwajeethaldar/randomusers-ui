@@ -13,11 +13,11 @@ export const Pagination = ({total=1, current, setPage}) => {
 
    },[current])
    
-   if(total===1){
-      current = 1
-  
+   if(total===0){
+        total = 1
     }
-    let pages = new Array(total).fill(0)
+
+    let pages = new Array(total-1).fill(0)
     // console.log(pages,total);
     return (
        total>1 &&<Flex justify={"center"} gap="15px" my="20px">
