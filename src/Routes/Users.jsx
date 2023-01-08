@@ -8,6 +8,7 @@ import { getUsers } from '../store/usersSlice'
 import axios from 'axios'
 import Loading from '../components/Loading'
 import { Show, Hide } from '@chakra-ui/react'
+import UsersListM from '../components/UsersListM'
 
 export default function Users() {
 
@@ -18,7 +19,7 @@ export default function Users() {
   // COuntry list for filter 
   const [countrylist, setCountryList] =  useState([])
   // State to manage current page 
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
 
   const [loadingState, setLoadingState] =  useState(true)
    
@@ -53,6 +54,7 @@ export default function Users() {
     // }
     setPage(0)
     getusers()
+    console.log(page);
   }
 
 
@@ -118,7 +120,12 @@ export default function Users() {
           </Thead>
         </Show>
         <Tbody>
-          { userslist.users.length>0 && <UsersList users={userslist.users}/>}
+        <Show below='md'>
+            { userslist.users.length>0 && <UsersListM users={userslist.users}/>}
+        </Show>
+        <Show above='md'>
+            { userslist.users.length>0 && <UsersList users={userslist.users}/>}
+        </Show>
                
         </Tbody>
 
