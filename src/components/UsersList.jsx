@@ -7,7 +7,6 @@ export default function UsersList({users=[]}) {
   return (
    <>
     <Show breakpoint='(min-width:901px)'>
-   
    {users.map((user, i)=>{
        return <Tr key={user._id} textTransform={"uppercase"} fontSize={"14px"} outline={"1px solid rgba(250,200,250,.5)"}>
                    <Td> {i+1} </Td>
