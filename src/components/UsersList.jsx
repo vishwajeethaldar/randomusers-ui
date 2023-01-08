@@ -9,7 +9,7 @@ export default function UsersList({users=[]}) {
     <Show breakpoint='(min-width:901px)'>
    
    {users.map((user, i)=>{
-       return <Tr key={user._id} textTransform={"uppercase"} fontSize={"14px"}>
+       return <Tr key={user._id} textTransform={"uppercase"} fontSize={"14px"} outline={"1px solid rgba(250,200,250,.5)"}>
                    <Td> {i+1} </Td>
                    <Td>{user.name.title}</Td>
                    <Td>{user.name.first}</Td>
@@ -18,8 +18,8 @@ export default function UsersList({users=[]}) {
                    <Td>{user.email}</Td>
                    <Td> {user.cell} </Td>
                    <Td> {user.location.country} </Td>
-                   <Td> 
-                       <Image src={user.picture.large}/>
+                   <Td _hover={{transform:"scale(1.1)", transition:".2s all ease-in"}} > 
+                       <Image src={user.picture.large} borderRadius={"10px"} border={"1px solid #ccc"}/>
                     </Td>
               </Tr>
    })}

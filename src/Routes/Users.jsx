@@ -1,4 +1,4 @@
-import { Table, Tbody, Flex, Th, Thead, Tr, Box, Select, Button, Text } from '@chakra-ui/react'
+import { Table, Tbody, Flex, Th, Thead, Tr, Box, Select, Button, Text, Image } from '@chakra-ui/react'
 import React, {useEffect,useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -71,7 +71,7 @@ export default function Users() {
 
   return (
     <>
-     <Loading loadingState={loadingState}/>
+     
     <Flex px={"20px"} py="15px" gap="10px" >
         <Box>
             <Link to="/"><Button colorScheme={"blue"}> Go Back </Button></Link>
@@ -84,7 +84,7 @@ export default function Users() {
             </Select>
         </Box>
 
-        <Box> 
+        <Box > 
             <Select outline={"1px solid blue"} onChange={(e)=>setQueries({...queries, country:e.target.value})}>
                 <option value="">filter by Country</option>
                 {countrylist.map((country)=>{
@@ -99,33 +99,45 @@ export default function Users() {
 
     </Flex>
 
-    {/* Table  */}
-    <Table w={"100%"}>
+    <Box maxH={"80vh"} overflowY="scroll" scrollPadding={"0px"}>
+      {/* Table  */}
+    <Table w={"96%"} mx={"auto"} position={"relative"}>
         <Show breakpoint='(min-width: 901px)'>
-          <Thead bg={"#ccc"}>
-              <Tr border={"1px solid #555"}>
-                  <Th> Sr. </Th>
-                  <Th>Title</Th>
-                  <Th>First Name.</Th>
-                  <Th>Last Name.</Th>
-                  <Th> Gender </Th>
-                  <Th>Email</Th>
-                  <Th> Cell </Th>
-                  <Th> Country </Th>
-                  <Th> Avtar </Th>
+          <Thead bg={"telegram.800"} >
+              <Tr border={"1px solid #555"} >
+                  <Th color="#fff" textAlign={"center"}> Sr. </Th>
+                  <Th color="#fff" textAlign={"center"}>Title</Th>
+                  <Th color="#fff" textAlign={"center"}>First Name.</Th>
+                  <Th color="#fff" textAlign={"center"}>Last Name.</Th>
+                  <Th color="#fff" textAlign={"center"}> Gender </Th>
+                  <Th color="#fff" textAlign={"center"}>Email</Th>
+                  <Th color="#fff" textAlign={"center"}> Cell </Th>
+                  <Th color="#fff" textAlign={"center"}> Country </Th>
+                  <Th color="#fff" textAlign={"center"}> Avtar </Th>
               </Tr>
           </Thead>
         </Show>
         <Tbody>
-              {userslist.users.length>0?<UsersList users={userslist.users}/>:
-              <Box textAlign={"center"} py={"35px"} w={"100%"} fontSize={"48px"} fontWeight={"bold"}>
-                <Text> Records Not Found...</Text>  
-              </Box>}  
+          { userslist.users.length>0 && <UsersList users={userslist.users}/>}
+               
         </Tbody>
 
-    </Table>
+        </Table>
+
+        {/* Loader */}
+              <Box position={"relative"}>
+              <Loading loadingState={loadingState}/>
+              </Box>
+       {/* Data not found Image */}
+            {userslist.users.length===0 && <Box textAlign={"center"} py={"35px"} w={"100%"} fontSize={"48px"} fontWeight={"bold"} >
+              {!loadingState&& <Image src='/img/no-result.gif' mx={"auto"}/> } 
+            </Box>}
+
+    </Box>
+
     {/* Pagination Component */}
     <Pagination setPage={setPage} total={userslist.totalPage} current={page}/>
+   
     </>
   )
 }
