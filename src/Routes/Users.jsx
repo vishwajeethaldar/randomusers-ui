@@ -102,7 +102,7 @@ export default function Users() {
     {/* Table  */}
     <Table w={"100%"}>
         <Show breakpoint='(min-width: 901px)'>
-          <Thead>
+          <Thead bg={"#ccc"}>
               <Tr border={"1px solid #555"}>
                   <Th> Sr. </Th>
                   <Th>Title</Th>
